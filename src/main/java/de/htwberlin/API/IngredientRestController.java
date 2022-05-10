@@ -21,7 +21,7 @@ public class IngredientRestController {
         ingredients.add(new Ingredient(2,"Lachs",false,false ));
 
     }
-@GetMapping(path = "/api/v1/Ingredient")
+    @GetMapping(path = "/api/v1/Ingredient")
     public ResponseEntity <List<Ingredient>> fetchIngredient(){
         return ResponseEntity.ok(ingredients);
 }
