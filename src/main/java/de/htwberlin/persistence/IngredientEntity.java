@@ -1,8 +1,10 @@
 package de.htwberlin.persistence;
 
 import javax.persistence.*;
+import java.util.Set;
 
-@Entity(name = "ingredients")
+
+@Entity(name = "ingredient")
 public class IngredientEntity {
 
     @Id
@@ -19,9 +21,10 @@ public class IngredientEntity {
     @Column(name ="vegan",nullable = false)
     private boolean vegan;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "recipe_id",referencedColumnName = "id")
-    private RecipeEntity recipe;
+    @OneToMany(mappedBy = "ingredient")
+    Set<AmountEntity> amount;
+
+
 
     public IngredientEntity(long id, String ingName, boolean vegetarian, boolean vegan) {
         this.id = id;
@@ -60,4 +63,5 @@ public class IngredientEntity {
     public void setVegan(boolean vegan) {
         this.vegan = vegan;
     }
+
 }
