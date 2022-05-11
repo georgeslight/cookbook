@@ -1,4 +1,4 @@
-package de.htwberlin.API;
+package de.htwberlin.api;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

@@ -1,6 +1,6 @@
 package de.htwberlin.persistence;
 
-import de.htwberlin.API.Amount;
+import de.htwberlin.api.Amount;
 
 import javax.persistence.*;
 

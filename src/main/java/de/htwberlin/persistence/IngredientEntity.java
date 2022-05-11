@@ -9,21 +9,20 @@ public class IngredientEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
+    @Column(name = "id")
     private long id;
 
-    @Column(name ="ingName",nullable = false)
+    @Column(name = "ingName", nullable = false)
     private String ingName;
 
-    @Column(name ="vegetarian",nullable = false)
+    @Column(name = "vegetarian", nullable = false)
     private boolean vegetarian;
 
-    @Column(name ="vegan",nullable = false)
+    @Column(name = "vegan", nullable = false)
     private boolean vegan;
 
     @OneToMany(mappedBy = "ingredient")
     Set<AmountEntity> amount;
-
 
 
     public IngredientEntity(long id, String ingName, boolean vegetarian, boolean vegan) {

@@ -1,4 +1,4 @@
-package de.htwberlin.API;
+package de.htwberlin.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,16 +13,17 @@ public class IngredientRestController {
 
     private List<Ingredient> ingredients;
 
-    public IngredientRestController(){
+    public IngredientRestController() {
         ingredients = new ArrayList<>();
-        ingredients.add(new Ingredient(1,"Tomate",true,true ));
-        ingredients.add(new Ingredient(2,"Mozzarella",true,false ));
-        ingredients.add(new Ingredient(2,"Lachs",false,false ));
+        ingredients.add(new Ingredient(1, "Tomate", true, true));
+        ingredients.add(new Ingredient(2, "Mozzarella", true, false));
+        ingredients.add(new Ingredient(3, "Lachs", false, false));
 
     }
+
     @GetMapping(path = "/api/v1/Ingredient")
     @ResponseStatus(code = HttpStatus.OK)
-    public List<Ingredient> fetchIngredient(){
+    public List<Ingredient> fetchIngredient() {
         return ingredients;
     }
 

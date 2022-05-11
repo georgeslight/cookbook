@@ -1,4 +1,4 @@
-package de.htwberlin.API;
+package de.htwberlin.api;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ public class Recipe {
     private String recipeName;
     private long id;
 
-    public Recipe(long id,String recipeName, ArrayList<Ingredient> ing) {
+    public Recipe(long id, String recipeName, ArrayList<Ingredient> ing) {
         this.ingredients = ing;
         this.recipeName = recipeName;
         this.id = id;
