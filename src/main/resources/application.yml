@@ -1,0 +1,41 @@
+#Configure Data Source Properties
+#spring.datasource.url=${JDBC_DATABASE_URL}
+#spring.datasource.username=${JDBC_DATABASE_USERNAME}
+#spring.datasource.password=${JDBC_DATABASE_PASSWORD}
+#spring.datasource.driver-class-name=org.postgresql.Driver
+#spring.datasource.hikari.maximum-pool-size=5
+#
+#spring.jpa.dialect=org.hibernate.dialect.PostgresSQLDialect
+#spring.jpa.jbdc.time_zone=UTC
+#spring.jpa.properties.show_sql=false
+#spring.jpa.properties.database-plataform=org.hibernate.dialect.PostgresSQLDialect
+#spring.jpa.properties.hibernate.ddl-auto=update
+#spring.jpa.properties.open-in-view=false
+#
+#spring.sql.init.platform=postgres
+#spring.sql.init.mode=always
+
+spring:
+  datasource:
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
+    url: ${JDBC_DATABASE_URL}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
+  jpa:
+    properties:
+      hibernate:
+        # The SQL dialect makes Hibernate generate better SQL for the chosen database
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          time_zone: UTC
+    show-sql: false # Set true for debugging
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update # (create, create-drop, validate, update)
+    open-in-view: false
+  sql:
+    init:
+      platform: postgres
+      mode: always
