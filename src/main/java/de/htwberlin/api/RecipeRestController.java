@@ -1,6 +1,5 @@
 package de.htwberlin.api;
 
-import de.htwberlin.persistence.RecipeRepository;
 import de.htwberlin.services.RecipeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
