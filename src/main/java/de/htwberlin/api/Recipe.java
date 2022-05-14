@@ -10,8 +10,8 @@ public class Recipe {
     private String recipeName;
     private long id;
 
-    public Recipe(long id, String recipeName, ArrayList<Ingredient> ing) {
-        this.ingredients = ing;
+    public Recipe(long id, String recipeName/*, ArrayList<Ingredient> ing*/) {
+//        this.ingredients = ing;
         this.recipeName = recipeName;
         this.id = id;
     }
