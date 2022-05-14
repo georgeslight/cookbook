@@ -7,6 +7,7 @@ import de.htwberlin.persistence.IngredientEntity;
 import de.htwberlin.persistence.IngredientRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class IngredientService {
@@ -18,7 +19,7 @@ public class IngredientService {
 
     public List<Ingredient> findAll() {
         List<IngredientEntity> ingredients = ingredientRepository.findAll();
-        return null;//ingredients.stream().map(this::transformEntity).collect(Collectors.toList());
+        return ingredients.stream().map(ingredientEntity -> new Ingredient(ingredientEntity.getId(),ingredientEntity.getIngName(),ingredientEntity.isVegetarian(),ingredientEntity.isVegan())).collect(Collectors.toList());
     }
 
     public Ingredient create(IngredientManipulationRequest request) {

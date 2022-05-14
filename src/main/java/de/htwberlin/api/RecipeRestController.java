@@ -1,5 +1,8 @@
 package de.htwberlin.api;
 
+
+import de.htwberlin.api.Ingredient;
+import de.htwberlin.api.Recipe;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
