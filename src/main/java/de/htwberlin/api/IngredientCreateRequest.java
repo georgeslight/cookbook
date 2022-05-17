@@ -1,12 +1,12 @@
 package de.htwberlin.api;
 
-public class IngredientCreateReuquest {
+public class IngredientCreateRequest {
     private long id;
     private String ingName;
     private boolean vegetarian;
     private boolean vegan;
 
-    public IngredientCreateReuquest(String ingName, boolean vegetarian, boolean vegan) {
+    public IngredientCreateRequest(String ingName, boolean vegetarian, boolean vegan) {
         this.ingName = ingName;
         this.vegetarian = vegetarian;
         this.vegan = vegan;

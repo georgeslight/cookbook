@@ -1,8 +1,6 @@
 package de.htwberlin.api;
 
-import de.htwberlin.persistence.IngredientRepository;
 import de.htwberlin.services.IngredientService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +9,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-public class
-IngredientRestController {
+public class IngredientRestController {
 
     private final IngredientService ingredientService;
 
@@ -20,14 +17,13 @@ IngredientRestController {
         this.ingredientService = ingredientService;
     }
 
-
     @GetMapping(path = "/api/v1/Ingredient")
     public ResponseEntity<List<Ingredient>> fetchIngredient() {
         return ResponseEntity.ok(ingredientService.findAll());
     }
 
     @PostMapping(path = "api/v1/Ingredient")
-    public ResponseEntity<Void> createIngredient(@RequestBody IngredientCreateReuquest request) throws URISyntaxException {
+    public ResponseEntity<Void> createIngredient(@RequestBody IngredientCreateRequest request) throws URISyntaxException {
     var ingredient =ingredientService.create(request);
     URI uri = new URI("api/v1/Ingredient/" + ingredient.getId());
     return ResponseEntity.created(uri).build();

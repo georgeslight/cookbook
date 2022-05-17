@@ -3,7 +3,9 @@ package de.htwberlin.persistence;
 import javax.persistence.*;
 import java.util.Set;
 
-
+/**
+ * Stellt Tabelle und Spalten der Klasse Ingredient in der Datenbank her.
+ */
 @Entity(name = "ingredient")
 public class IngredientEntity {
 
