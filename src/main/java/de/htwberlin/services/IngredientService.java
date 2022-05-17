@@ -1,6 +1,7 @@
 package de.htwberlin.services;
 
 import de.htwberlin.api.Ingredient;
+import de.htwberlin.api.IngredientCreateReuquest;
 import de.htwberlin.api.IngredientManipulationRequest;
 import org.springframework.stereotype.Service;
 import de.htwberlin.persistence.IngredientEntity;
@@ -20,6 +21,19 @@ public class IngredientService {
     public List<Ingredient> findAll() {
         List<IngredientEntity> ingredients = ingredientRepository.findAll();
         return ingredients.stream().map(ingredientEntity -> new Ingredient(ingredientEntity.getId(),ingredientEntity.getIngName(),ingredientEntity.isVegetarian(),ingredientEntity.isVegan())).collect(Collectors.toList());
+    }
+
+    public Ingredient create(IngredientCreateReuquest request){
+        var ingredientEntity = new IngredientEntity(request.getIngName(),request.isVegan(), request.isVegetarian());
+        ingredientEntity = ingredientRepository.save(ingredientEntity);
+        return transformEntity(ingredientEntity);
+    }
+
+    private Ingredient transformEntity(IngredientEntity ingredientEntity){
+        return new Ingredient(ingredientEntity.getId(),
+                ingredientEntity.getIngName(),
+                ingredientEntity.isVegetarian(),
+                ingredientEntity.isVegan());
     }
 
     public Ingredient create(IngredientManipulationRequest request) {

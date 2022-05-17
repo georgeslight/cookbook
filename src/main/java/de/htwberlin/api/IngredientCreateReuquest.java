@@ -1,42 +1,15 @@
-package de.htwberlin.persistence;
+package de.htwberlin.api;
 
-import javax.persistence.*;
-import java.util.Set;
-
-
-@Entity(name = "ingredient")
-public class IngredientEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+public class IngredientCreateReuquest {
     private long id;
-
-    @Column(name = "ingName", nullable = false)
     private String ingName;
-
-    @Column(name = "vegetarian", nullable = false)
     private boolean vegetarian;
-
-    @Column(name = "vegan", nullable = false)
     private boolean vegan;
 
-    @OneToMany(mappedBy = "ingredient")
-    Set<AmountEntity> amount;
-
-
-    public IngredientEntity(String ingName, boolean vegetarian, boolean vegan) {
-
+    public IngredientCreateReuquest(String ingName, boolean vegetarian, boolean vegan) {
         this.ingName = ingName;
         this.vegetarian = vegetarian;
         this.vegan = vegan;
-    }
-
-    protected IngredientEntity() {
-    }
-
-    public long getId() {
-        return id;
     }
 
     public String getIngName() {
@@ -62,5 +35,4 @@ public class IngredientEntity {
     public void setVegan(boolean vegan) {
         this.vegan = vegan;
     }
-
 }
