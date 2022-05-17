@@ -27,7 +27,7 @@ IngredientRestController {
     }
 
     @PostMapping(path = "api/v1/Ingredient")
-    public ResponseEntity<Void> createIngredient(@RequestBody IngredientCreateReuquest request) throws URISyntaxException {
+    public ResponseEntity<Void> createIngredient(@RequestBody IngredientCreateRequest request) throws URISyntaxException {
     var ingredient =ingredientService.create(request);
     URI uri = new URI("api/v1/Ingredient/" + ingredient.getId());
     return ResponseEntity.created(uri).build();
