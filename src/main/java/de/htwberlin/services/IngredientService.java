@@ -2,7 +2,6 @@ package de.htwberlin.services;
 
 import de.htwberlin.api.Ingredient;
 import de.htwberlin.api.IngredientCreateReuquest;
-import de.htwberlin.api.IngredientManipulationRequest;
 import org.springframework.stereotype.Service;
 import de.htwberlin.persistence.IngredientEntity;
 import de.htwberlin.persistence.IngredientRepository;
@@ -34,9 +33,5 @@ public class IngredientService {
                 ingredientEntity.getIngName(),
                 ingredientEntity.isVegetarian(),
                 ingredientEntity.isVegan());
-    }
-
-    public Ingredient create(IngredientManipulationRequest request) {
-        return null;
     }
 }
