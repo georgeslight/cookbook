@@ -1,7 +1,6 @@
 package de.htwberlin.api;
 
     public class IngredientCreateRequest {
-        private long id;
         private String ingName;
         private boolean vegetarian;
         private boolean vegan;

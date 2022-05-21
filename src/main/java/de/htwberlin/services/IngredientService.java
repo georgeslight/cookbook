@@ -19,7 +19,7 @@ public class IngredientService {
 
     public List<Ingredient> findAll() {
         List<IngredientEntity> ingredients = ingredientRepository.findAll();
-        return ingredients.stream().map(ingredientEntity -> new Ingredient(ingredientEntity.getId(),ingredientEntity.getIngName(),ingredientEntity.isVegetarian(),ingredientEntity.isVegan())).collect(Collectors.toList());
+        return ingredients.stream().map(this::transformEntity).collect(Collectors.toList());
     }
 
     public Ingredient create(IngredientCreateRequest request){
@@ -29,9 +29,6 @@ public class IngredientService {
     }
 
     private Ingredient transformEntity(IngredientEntity ingredientEntity){
-        return new Ingredient(ingredientEntity.getId(),
-                ingredientEntity.getIngName(),
-                ingredientEntity.isVegetarian(),
-                ingredientEntity.isVegan());
+        return new Ingredient(ingredientEntity.getId(), ingredientEntity.getIngName(), ingredientEntity.isVegetarian(), ingredientEntity.isVegan());
     }
 }
