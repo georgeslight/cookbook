@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class IngredientService {
+
     private final IngredientRepository ingredientRepository;
 
     public IngredientService(IngredientRepository ingredientRepository) {
