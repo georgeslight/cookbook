@@ -1,12 +1,15 @@
 package de.htwberlin.services;
 
+import de.htwberlin.api.Ingredient;
 import de.htwberlin.api.Recipe;
+import de.htwberlin.persistence.AmountEntity;
 import de.htwberlin.persistence.RecipeEntity;
 import de.htwberlin.persistence.RecipeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 @Service
 public class RecipeService {
@@ -18,10 +21,19 @@ public class RecipeService {
     }
 
     public List<Recipe> findAll() {
-        List<RecipeEntity> recipe = recipeRepository.findAll();
-        return recipe.stream()
-                .map(recipeEntity -> new Recipe(recipeEntity.getId(),
-                        recipeEntity.getRecipeName()))
-                .collect(Collectors.toList());
+        List<RecipeEntity> recipes = recipeRepository.findAll();
+        List<Recipe> recipeList = new ArrayList<>();
+
+        for (RecipeEntity recipeEntity : recipes) {
+            ArrayList<Ingredient> ingredients = new ArrayList<>();
+            Set<AmountEntity> amounts = recipeEntity.getAmount();
+            for (AmountEntity amount : amounts) {
+                ingredients.add(new Ingredient(amount.getIngredient().getId(), amount.getIngredient().getIngName(),
+                        amount.getIngredient().isVegetarian(), amount.getIngredient().isVegan()));
+            }
+            Recipe recipe = new Recipe(recipeEntity.getId(), recipeEntity.getRecipeName(), ingredients);
+            recipeList.add(recipe);
+        }
+        return recipeList;
     }
 }

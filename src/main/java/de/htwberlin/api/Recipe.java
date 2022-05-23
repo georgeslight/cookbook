@@ -10,10 +10,10 @@ public class Recipe {
     private String recipeName;
     private long id;
 
-    public Recipe(long id, String recipeName/*, ArrayList<Ingredient> ing*/) {
-//        this.ingredients = ing;
-        this.recipeName = recipeName;
+    public Recipe(long id, String recipeName, ArrayList<Ingredient> ing) {
         this.id = id;
+        this.recipeName = recipeName;
+        this.ingredients = ing;
     }
 
     public List<Ingredient> getIngredients() {

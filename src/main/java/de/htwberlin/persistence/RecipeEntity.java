@@ -40,5 +40,7 @@ public class RecipeEntity {
         this.recipeName = recipeName;
     }
 
-
+    public Set<AmountEntity> getAmount() {
+        return amount;
+    }
 }
