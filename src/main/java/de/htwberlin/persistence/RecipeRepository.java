@@ -9,4 +9,6 @@ import java.util.List;
 public interface RecipeRepository extends JpaRepository<RecipeEntity, Long> {
 
     List<RecipeEntity> findAllByRecipeName(String recipeName);
+    // List<RecipeEntity> findRecipeByIngredientsName(List<String> ingredientsName);
+//    How to make a method that finds a Recipe by Ingredients(1 or +) name?
 }

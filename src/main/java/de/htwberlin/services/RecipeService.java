@@ -7,6 +7,7 @@ import de.htwberlin.persistence.RecipeEntity;
 import de.htwberlin.persistence.RecipeRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -20,6 +21,7 @@ public class RecipeService {
         this.recipeRepository = recipeRepository;
     }
 
+    @Transactional
     public List<Recipe> findAll() {
         List<RecipeEntity> recipes = recipeRepository.findAll();
         List<Recipe> recipeList = new ArrayList<>();
