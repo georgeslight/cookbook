@@ -1,24 +1,23 @@
 package de.htwberlin.persistence;
 
-import de.htwberlin.api.Amount;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name="amount")
 public class AmountEntity {
 
-    @EmbeddedId
-    Amount id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private long id;
 
     @ManyToOne
-    @MapsId("ingredientId")
-    @JoinColumn(name = "ingredient_id")
-    IngredientEntity ingredient;
+    @JoinColumn(name = "ingredient_id", referencedColumnName = "id")
+    private IngredientEntity ingredient;
 
     @ManyToOne
-    @MapsId("recipeId")
-    @JoinColumn(name = "recipe_id")
-    RecipeEntity recipe;
+    @JoinColumn(name = "recipe_id", referencedColumnName = "id")
+    private RecipeEntity recipe;
 
     int amount;
     String units;
@@ -27,13 +26,8 @@ public class AmountEntity {
 
     }
 
-
-    public Amount getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(Amount id) {
-        this.id = id;
     }
 
     public IngredientEntity getIngredient() {

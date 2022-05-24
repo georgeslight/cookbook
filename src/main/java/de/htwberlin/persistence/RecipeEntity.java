@@ -16,7 +16,7 @@ public class RecipeEntity {
     private String recipeName;
 
 
-    @OneToMany(mappedBy = "ingredient")
+    @OneToMany(mappedBy = "recipe")
     Set<AmountEntity> amount;
 
 
