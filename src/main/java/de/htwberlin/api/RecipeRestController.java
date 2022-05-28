@@ -3,6 +3,7 @@ package de.htwberlin.api;
 import de.htwberlin.services.RecipeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,9 +17,8 @@ public class RecipeRestController {
         this.recipeService = recipeService;
     }
 
-    @GetMapping(path = "/api/v1/Recipe")
+    @GetMapping(path = "/api/v1/recipe")
     public ResponseEntity<List<Recipe>> fetchRecipes() {
         return ResponseEntity.ok(recipeService.findAll());
     }
-
 }

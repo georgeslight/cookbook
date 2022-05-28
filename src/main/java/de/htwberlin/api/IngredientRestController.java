@@ -17,15 +17,15 @@ public class IngredientRestController {
         this.ingredientService = ingredientService;
     }
 
-    @GetMapping(path = "/api/v1/Ingredient")
+    @GetMapping(path = "/api/v1/ingredient")
     public ResponseEntity<List<Ingredient>> fetchIngredient() {
         return ResponseEntity.ok(ingredientService.findAll());
     }
 
-    @PostMapping(path = "api/v1/Ingredient")
+    @PostMapping(path = "api/v1/ingredient")
     public ResponseEntity<Void> createIngredient(@RequestBody IngredientCreateRequest request) throws URISyntaxException {
-    var ingredient =ingredientService.create(request);
-    URI uri = new URI("api/v1/Ingredient/" + ingredient.getId());
-    return ResponseEntity.created(uri).build();
+        var ingredient =ingredientService.create(request);
+        URI uri = new URI("api/v1/ingredient/" + ingredient.getId());
+        return ResponseEntity.created(uri).build();
     }
 }
