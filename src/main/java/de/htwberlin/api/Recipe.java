@@ -12,21 +12,57 @@ public class Recipe {
     private Ingredient[] usedIngredients;
     private Ingredient[] unusedIngredients;
     private int likes;
+    private int aggregateLikes;
     private boolean vegan;
     private boolean vegetarian;
     private String summary;
     private List<Ingredient> extendedIngredients;
+    private int servings;
+    private int readyInMinutes;
+    private String[] dishTypes;
 
     public Recipe(long id, String title, List<Ingredient> ingredients) {
         this.id = id;
         this.title = title;
         this.extendedIngredients = ingredients;
-    };
+    }
 
-    public Recipe() {};
+    public Recipe() {}
 
     public List<Ingredient> getExtendedIngredients() {
         return extendedIngredients;
+    }
+
+    public int getAggregateLikes() {
+        return aggregateLikes;
+    }
+
+    public void setAggregateLikes(int aggregateLikes) {
+        this.aggregateLikes = aggregateLikes;
+    }
+
+    public int getServings() {
+        return servings;
+    }
+
+    public void setServings(int servings) {
+        this.servings = servings;
+    }
+
+    public int getReadyInMinutes() {
+        return readyInMinutes;
+    }
+
+    public void setReadyInMinutes(int readyInMinutes) {
+        this.readyInMinutes = readyInMinutes;
+    }
+
+    public String[] getDishTypes() {
+        return dishTypes;
+    }
+
+    public void setDishTypes(String[] dishTypes) {
+        this.dishTypes = dishTypes;
     }
 
     public boolean isVegan() {
