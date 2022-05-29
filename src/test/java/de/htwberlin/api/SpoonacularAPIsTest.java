@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -24,7 +26,7 @@ public class SpoonacularAPIsTest {
 
     private static final String QUERY_PARAM_NAME = "ingredients";
 
-    private static final String QUERY_PARAM_VALUE = "avocado";
+    private static final List<String> QUERY_PARAM_VALUE = List.of("avocado", "apple", "butter");
 
     //Spring WebClient
     @Test
@@ -35,7 +37,7 @@ public class SpoonacularAPIsTest {
         Mono<ResponseEntity<String>> mono = client.get()
                 .uri(builder -> builder.path(ENDPOINT_PATH)
                         .queryParam(API_KEY_NAME, this.apiKey)
-                        .queryParam(QUERY_PARAM_NAME, QUERY_PARAM_VALUE)
+                        .queryParam(QUERY_PARAM_NAME, String.join(",+", QUERY_PARAM_VALUE))
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
@@ -48,13 +50,5 @@ public class SpoonacularAPIsTest {
         System.out.println(response.getBody());
         assertEquals(200, response.getStatusCodeValue());
 
-        //Async Call
-//        mono.subscribe(response -> {
-//            System.out.println(response.getBody());
-//            assertEquals(200, response.getStatusCodeValue());
-//        });
-//
-//        System.out.println("This should print first because is async");
-//        Thread.sleep(5000);
     }
 }
