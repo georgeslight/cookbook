@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -26,5 +27,10 @@ public class RecipeRestController {
     @GetMapping(value = "/recipeByIngredients/{ingredients}")
     public Flux<Recipe> findByIngredientName(@PathVariable("ingredients") List<String> ingredients) {
         return recipeService.getRecipe(ingredients);
+    }
+
+    @GetMapping(value = "/recipeInformation/{id}")
+    public Mono<Recipe> getRecipeInformation(@PathVariable("id") long id) {
+        return recipeService.getRecipeInformation(id);
     }
 }

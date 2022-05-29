@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -48,11 +49,11 @@ public class RecipeService {
 
     private static final String ENDPOINT = "https://api.spoonacular.com";
 
-    private static final String ENDPOINT_PATH = "/recipes/findByIngredients";
+    private static final String RECIPE_BY_INGREDIENTS_PATH = "/recipes/findByIngredients";
+
+    private static final String RECIPE_INFORMATION_PATH = "/recipes";
 
     private static final String API_KEY_NAME = "apiKey";
-
-    private static final String QUERY_PARAM_NAME = "ingredients";
 
     private final WebClient client;
 
@@ -63,12 +64,24 @@ public class RecipeService {
     public Flux<Recipe> getRecipe(List<String> ingredients) {
 
         return client.get()
-                .uri(builder -> builder.path(ENDPOINT_PATH)
+                .uri(builder -> builder.path(RECIPE_BY_INGREDIENTS_PATH)
                         .queryParam(API_KEY_NAME, this.apiKey)
-                        .queryParam(QUERY_PARAM_NAME, String.join(",+", ingredients))
+                        .queryParam("ingredients", String.join(",+", ingredients))
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToFlux(Recipe.class);
+    }
+
+    public Mono<Recipe> getRecipeInformation(long id) {
+
+        return client.get()
+                .uri(builder -> builder.path(RECIPE_INFORMATION_PATH)
+                        .pathSegment(Long.toString(id), "information").path("/")
+                        .queryParam(API_KEY_NAME, this.apiKey)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(Recipe.class);
     }
 }

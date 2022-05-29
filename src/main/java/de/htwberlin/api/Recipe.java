@@ -16,6 +16,9 @@ public class Recipe {
     private Ingredient[] usedIngredients;
     private Ingredient[] unusedIngredients;
     private int likes;
+    private boolean vegan;
+    private boolean vegetarian;
+    private String summary;
     private List<Ingredient> ingredients;
 
     public Recipe(long id, String title, List<Ingredient> ingredients) {
@@ -28,6 +31,30 @@ public class Recipe {
 
     public List<Ingredient> getIngredients() {
         return ingredients;
+    }
+
+    public boolean isVegan() {
+        return vegan;
+    }
+
+    public void setVegan(boolean vegan) {
+        this.vegan = vegan;
+    }
+
+    public boolean isVegetarian() {
+        return vegetarian;
+    }
+
+    public void setVegetarian(boolean vegetarian) {
+        this.vegetarian = vegetarian;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public void setIngredients(List<Ingredient> ingredients) {
