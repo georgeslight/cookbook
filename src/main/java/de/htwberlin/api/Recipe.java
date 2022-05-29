@@ -1,6 +1,5 @@
 package de.htwberlin.api;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,9 +8,6 @@ public class Recipe {
     private long id;
     private String title;
     private String image;
-    private String imageType;
-    private int usedIngredientCount;
-    private int missedIngredientCount;
     private Ingredient[] missedIngredients;
     private Ingredient[] usedIngredients;
     private Ingredient[] unusedIngredients;
@@ -19,18 +15,18 @@ public class Recipe {
     private boolean vegan;
     private boolean vegetarian;
     private String summary;
-    private List<Ingredient> ingredients;
+    private List<Ingredient> extendedIngredients;
 
     public Recipe(long id, String title, List<Ingredient> ingredients) {
         this.id = id;
         this.title = title;
-        this.ingredients = ingredients;
+        this.extendedIngredients = ingredients;
     };
 
     public Recipe() {};
 
-    public List<Ingredient> getIngredients() {
-        return ingredients;
+    public List<Ingredient> getExtendedIngredients() {
+        return extendedIngredients;
     }
 
     public boolean isVegan() {
@@ -57,8 +53,8 @@ public class Recipe {
         this.summary = summary;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void setExtendedIngredients(List<Ingredient> extendedIngredients) {
+        this.extendedIngredients = extendedIngredients;
     }
 
     public long getId() {
@@ -83,30 +79,6 @@ public class Recipe {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public String getImageType() {
-        return imageType;
-    }
-
-    public void setImageType(String imageType) {
-        this.imageType = imageType;
-    }
-
-    public int getUsedIngredientCount() {
-        return usedIngredientCount;
-    }
-
-    public void setUsedIngredientCount(int usedIngredientCount) {
-        this.usedIngredientCount = usedIngredientCount;
-    }
-
-    public int getMissedIngredientCount() {
-        return missedIngredientCount;
-    }
-
-    public void setMissedIngredientCount(int missedIngredientCount) {
-        this.missedIngredientCount = missedIngredientCount;
     }
 
     public Ingredient[] getMissedIngredients() {

@@ -7,13 +7,7 @@ public class Ingredient {
     private long id;
     private double amount;
     private String unit;
-    private String unitLong;
-    private String unitShort;
-    private String aisle;
     private String name;
-    private String original;
-    private String originalName;
-    private List<String> meta;
     private String image;
 
     public Ingredient(long id, String name) {
@@ -47,60 +41,12 @@ public class Ingredient {
         this.unit = unit;
     }
 
-    public String getUnitLong() {
-        return unitLong;
-    }
-
-    public void setUnitLong(String unitLong) {
-        this.unitLong = unitLong;
-    }
-
-    public String getUnitShort() {
-        return unitShort;
-    }
-
-    public void setUnitShort(String unitShort) {
-        this.unitShort = unitShort;
-    }
-
-    public String getAisle() {
-        return aisle;
-    }
-
-    public void setAisle(String aisle) {
-        this.aisle = aisle;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getOriginal() {
-        return original;
-    }
-
-    public void setOriginal(String original) {
-        this.original = original;
-    }
-
-    public String getOriginalName() {
-        return originalName;
-    }
-
-    public void setOriginalName(String originalName) {
-        this.originalName = originalName;
-    }
-
-    public List<String> getMeta() {
-        return meta;
-    }
-
-    public void setMeta(List<String> meta) {
-        this.meta = meta;
     }
 
     public String getImage() {
