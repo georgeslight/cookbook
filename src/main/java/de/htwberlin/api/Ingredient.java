@@ -9,6 +9,8 @@ public class Ingredient {
     private String unit;
     private String name;
     private String image;
+    private boolean vegetarian;
+    private boolean vegan;
 
     public Ingredient(long id, String name) {
         this.id = id;
@@ -55,6 +57,22 @@ public class Ingredient {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public boolean isVegetarian() {
+        return vegetarian;
+    }
+
+    public void setVegetarian(boolean vegetarian) {
+        this.vegetarian = vegetarian;
+    }
+
+    public boolean isVegan() {
+        return vegan;
+    }
+
+    public void setVegan(boolean vegan) {
+        this.vegan = vegan;
     }
 
     @Override
