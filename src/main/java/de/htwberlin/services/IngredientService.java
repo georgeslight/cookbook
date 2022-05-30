@@ -30,6 +30,6 @@ public class IngredientService {
     }
 
     private Ingredient transformEntity(IngredientEntity ingredientEntity){
-        return new Ingredient(ingredientEntity.getId(), ingredientEntity.getIngName());
+        return new Ingredient(ingredientEntity.getId(), ingredientEntity.getIngName(), ingredientEntity.isVegetarian(), ingredientEntity.isVegan());
     }
 }

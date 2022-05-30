@@ -36,7 +36,7 @@ public class RecipeService {
             ArrayList<Ingredient> ingredients = new ArrayList<>();
             Set<AmountEntity> amounts = recipeEntity.getAmount();
             for (AmountEntity amount : amounts) {
-                ingredients.add(new Ingredient(amount.getIngredient().getId(), amount.getIngredient().getIngName()));
+                ingredients.add(new Ingredient(amount.getIngredient().getId(), amount.getIngredient().getIngName(), amount.getIngredient().isVegetarian(), amount.getIngredient().isVegan()));
             }
             Recipe recipe = new Recipe(recipeEntity.getId(), recipeEntity.getRecipeName(), ingredients);
             recipeList.add(recipe);

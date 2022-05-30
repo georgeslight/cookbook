@@ -12,9 +12,11 @@ public class Ingredient {
     private boolean vegetarian;
     private boolean vegan;
 
-    public Ingredient(long id, String name) {
+    public Ingredient(long id, String name, boolean vegetarian, boolean vegan) {
         this.id = id;
         this.name = name;
+        this.vegetarian = vegetarian;
+        this. vegan = vegan;
     };
 
     public Ingredient() {};
