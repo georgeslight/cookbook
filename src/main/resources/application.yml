@@ -39,3 +39,4 @@ spring:
     init:
       platform: postgres
       mode: always
+API_KEY: ${API_KEY}

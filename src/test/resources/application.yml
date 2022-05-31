@@ -9,3 +9,4 @@ spring:
             mode: always
     profiles:
         actives: test
+API_KEY: ${API_KEY}

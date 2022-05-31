@@ -64,5 +64,4 @@ public class IngredientEntity {
     public void setVegan(boolean vegan) {
         this.vegan = vegan;
     }
-
 }
