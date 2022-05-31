@@ -1,7 +1,5 @@
 package de.htwberlin.api;
 
-import java.util.List;
-
 public class Ingredient {
 
     private long id;

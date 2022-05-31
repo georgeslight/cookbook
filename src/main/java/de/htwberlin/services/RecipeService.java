@@ -57,10 +57,6 @@ public class RecipeService {
 
     private final WebClient client;
 
-//    public RecipeService(WebClient.Builder builder) {
-//        this.client = builder.baseUrl(ENDPOINT).build();
-//    }
-
     public Flux<Recipe> getRecipe(List<String> ingredients) {
 
         return client.get()
