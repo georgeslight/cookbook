@@ -12,6 +12,8 @@ public class IngredientCreateRequest {
         this.vegan = vegan;
     }
 
+    public IngredientCreateRequest(){};
+
     public String getIngName() {
         return ingName;
     }
