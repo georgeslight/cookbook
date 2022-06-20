@@ -41,4 +41,4 @@ spring:
       mode: always
 API_KEY: ${API_KEY}
 server:
-  port: 8081
+  port: 8080
