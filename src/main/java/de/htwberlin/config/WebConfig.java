@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("*")
                 .allowedMethods("*")
                 .allowedOrigins(
-                        "https://localhost:8081",
+                        "https://localhost:8080",
                         "https://webtech-cookbook-frontend.herokuapp.com"
                 );
     }
