@@ -38,7 +38,7 @@ public class RecipeService {
             for (AmountEntity amount : amounts) {
                 ingredients.add(new Ingredient(amount.getIngredient().getId(), amount.getIngredient().getIngName(), amount.getIngredient().isVegetarian(), amount.getIngredient().isVegan()));
             }
-            Recipe recipe = new Recipe(recipeEntity.getId(), recipeEntity.getRecipeName(), ingredients);
+            Recipe recipe = new Recipe(recipeEntity.getId(), recipeEntity.getRecipeName()/*, ingredients*/);
             recipeList.add(recipe);
         }
         return recipeList;
@@ -54,6 +54,8 @@ public class RecipeService {
     private static final String RECIPE_INFORMATION_PATH = "/recipes";
 
     private static final String API_KEY_NAME = "apiKey";
+
+    private static final String RANDOM_RECIPE = "/recipes/random";
 
     private final WebClient client;
 
@@ -79,5 +81,17 @@ public class RecipeService {
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(Recipe.class);
+    }
+
+    public Flux<Recipe> getRandomRecipe(long number) {
+
+        return client.get()
+                .uri(builder -> builder.path(RANDOM_RECIPE)
+                        .queryParam(API_KEY_NAME, this.apiKey)
+                        .queryParam("number", number)
+                        .build())
+                    .accept(MediaType.APPLICATION_JSON)
+                    .retrieve()
+                    .bodyToFlux(Recipe.class);
     }
 }

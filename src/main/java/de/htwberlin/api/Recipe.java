@@ -8,78 +8,78 @@ public class Recipe {
     private long id;
     private String title;
     private String image;
-    private Ingredient[] missedIngredients;
-    private Ingredient[] usedIngredients;
-    private Ingredient[] unusedIngredients;
+//    private Ingredient[] missedIngredients;
+//    private Ingredient[] usedIngredients;
+//    private Ingredient[] unusedIngredients;
     private int likes;
-    private int aggregateLikes;
-    private boolean vegan;
-    private boolean vegetarian;
+//    private int aggregateLikes;
+//    private boolean vegan;
+//    private boolean vegetarian;
     private String summary;
-    private List<Ingredient> extendedIngredients;
-    private int servings;
-    private int readyInMinutes;
-    private String[] dishTypes;
+//    private List<Ingredient> extendedIngredients;
+//    private int servings;
+//    private int readyInMinutes;
+//    private String[] dishTypes;
 
-    public Recipe(long id, String title, List<Ingredient> ingredients) {
+    public Recipe(long id, String title/*, List<Ingredient> ingredients*/) {
         this.id = id;
         this.title = title;
-        this.extendedIngredients = ingredients;
+//        this.extendedIngredients = ingredients;
     }
 
     public Recipe() {}
 
-    public List<Ingredient> getExtendedIngredients() {
-        return extendedIngredients;
-    }
-
-    public int getAggregateLikes() {
-        return aggregateLikes;
-    }
-
-    public void setAggregateLikes(int aggregateLikes) {
-        this.aggregateLikes = aggregateLikes;
-    }
-
-    public int getServings() {
-        return servings;
-    }
-
-    public void setServings(int servings) {
-        this.servings = servings;
-    }
-
-    public int getReadyInMinutes() {
-        return readyInMinutes;
-    }
-
-    public void setReadyInMinutes(int readyInMinutes) {
-        this.readyInMinutes = readyInMinutes;
-    }
-
-    public String[] getDishTypes() {
-        return dishTypes;
-    }
-
-    public void setDishTypes(String[] dishTypes) {
-        this.dishTypes = dishTypes;
-    }
-
-    public boolean isVegan() {
-        return vegan;
-    }
-
-    public void setVegan(boolean vegan) {
-        this.vegan = vegan;
-    }
-
-    public boolean isVegetarian() {
-        return vegetarian;
-    }
-
-    public void setVegetarian(boolean vegetarian) {
-        this.vegetarian = vegetarian;
-    }
+//    public List<Ingredient> getExtendedIngredients() {
+//        return extendedIngredients;
+//    }
+//
+//    public int getAggregateLikes() {
+//        return aggregateLikes;
+//    }
+//
+//    public void setAggregateLikes(int aggregateLikes) {
+//        this.aggregateLikes = aggregateLikes;
+//    }
+//
+//    public int getServings() {
+//        return servings;
+//    }
+//
+//    public void setServings(int servings) {
+//        this.servings = servings;
+//    }
+//
+//    public int getReadyInMinutes() {
+//        return readyInMinutes;
+//    }
+//
+//    public void setReadyInMinutes(int readyInMinutes) {
+//        this.readyInMinutes = readyInMinutes;
+//    }
+//
+//    public String[] getDishTypes() {
+//        return dishTypes;
+//    }
+//
+//    public void setDishTypes(String[] dishTypes) {
+//        this.dishTypes = dishTypes;
+//    }
+//
+//    public boolean isVegan() {
+//        return vegan;
+//    }
+//
+//    public void setVegan(boolean vegan) {
+//        this.vegan = vegan;
+//    }
+//
+//    public boolean isVegetarian() {
+//        return vegetarian;
+//    }
+//
+//    public void setVegetarian(boolean vegetarian) {
+//        this.vegetarian = vegetarian;
+//    }
 
     public String getSummary() {
         return summary;
@@ -89,9 +89,9 @@ public class Recipe {
         this.summary = summary;
     }
 
-    public void setExtendedIngredients(List<Ingredient> extendedIngredients) {
-        this.extendedIngredients = extendedIngredients;
-    }
+//    public void setExtendedIngredients(List<Ingredient> extendedIngredients) {
+//        this.extendedIngredients = extendedIngredients;
+//    }
 
     public long getId() {
         return id;
@@ -117,29 +117,29 @@ public class Recipe {
         this.image = image;
     }
 
-    public Ingredient[] getMissedIngredients() {
-        return missedIngredients;
-    }
-
-    public void setMissedIngredients(Ingredient[] missedIngredients) {
-        this.missedIngredients = missedIngredients;
-    }
-
-    public Ingredient[] getUsedIngredients() {
-        return usedIngredients;
-    }
-
-    public void setUsedIngredients(Ingredient[] usedIngredients) {
-        this.usedIngredients = usedIngredients;
-    }
-
-    public Ingredient[] getUnusedIngredients() {
-        return unusedIngredients;
-    }
-
-    public void setUnusedIngredients(Ingredient[] unusedIngredients) {
-        this.unusedIngredients = unusedIngredients;
-    }
+//    public Ingredient[] getMissedIngredients() {
+//        return missedIngredients;
+//    }
+//
+//    public void setMissedIngredients(Ingredient[] missedIngredients) {
+//        this.missedIngredients = missedIngredients;
+//    }
+//
+//    public Ingredient[] getUsedIngredients() {
+//        return usedIngredients;
+//    }
+//
+//    public void setUsedIngredients(Ingredient[] usedIngredients) {
+//        this.usedIngredients = usedIngredients;
+//    }
+//
+//    public Ingredient[] getUnusedIngredients() {
+//        return unusedIngredients;
+//    }
+//
+//    public void setUnusedIngredients(Ingredient[] unusedIngredients) {
+//        this.unusedIngredients = unusedIngredients;
+//    }
 
     public int getLikes() {
         return likes;
@@ -154,9 +154,9 @@ public class Recipe {
         return "Recipe{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", missedIngredients=" + Arrays.toString(missedIngredients) +
-                ", usedIngredients=" + Arrays.toString(usedIngredients) +
-                ", unusedIngredients=" + Arrays.toString(unusedIngredients) +
+//                ", missedIngredients=" + Arrays.toString(missedIngredients) +
+//                ", usedIngredients=" + Arrays.toString(usedIngredients) +
+//                ", unusedIngredients=" + Arrays.toString(unusedIngredients) +
                 '}';
     }
 

@@ -33,4 +33,9 @@ public class RecipeRestController {
     public Mono<Recipe> getRecipeInformation(@PathVariable("id") long id) {
         return recipeService.getRecipeInformation(id);
     }
+
+    @GetMapping(value="/randomRecipe/{number}")
+    public Flux<Recipe> getRandomRecipe(@PathVariable("number") long number) {
+        return recipeService.getRandomRecipe(number);
+    }
 }
