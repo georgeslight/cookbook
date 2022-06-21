@@ -1,6 +1,5 @@
 package de.htwberlin.api;
 
-import java.util.List;
 
 public class Ingredient {
 
@@ -11,7 +10,6 @@ public class Ingredient {
     private String image;
     private boolean vegetarian;
     private boolean vegan;
-    private List<Long> ingredients;
 
     public Ingredient(long id, String name, boolean vegetarian, boolean vegan) {
         this.id = id;
