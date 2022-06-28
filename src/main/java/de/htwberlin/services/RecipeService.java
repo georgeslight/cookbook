@@ -88,27 +88,15 @@ public class RecipeService {
                 .bodyToMono(Recipe.class);
     }
 
-//    public Flux<RecipeCard> searchRecipe(String query) {
-//        Flux<RecipeCard> result = client.get()
-//                .uri("recipes/complexSearch?apiKey=30b0ba6660f343a581c3f5123022eb73&query=" + query + "&diet=vegan")
-////                .uri(builder -> builder.path("/recipes/complexSearch")
-////                        .queryParam("apiKey", "30b0ba6660f343a581c3f5123022eb73")
-////                        .queryParam("query", query)
-////                        .queryParam("diet", "vegan")
-//////                        .queryParam("addRecipeInformation", true)
-////                        .build())
-//                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-//                .accept(MediaType.APPLICATION_JSON)
-////                .exchangeToFlux(response -> {
-////                    if (response.statusCode().equals((HttpStatus.OK))) {
-////                        return response.bodyToFlux(String.class);
-////                    } else {
-////                        return response.createException().flatMapMany(Mono::error);
-////                    }
-////                });
-//                    .retrieve()
-//                    .bodyToFlux(RecipeCard.class);
-//        System.out.println(result);
-//        return result;
-//    }
+    public Mono<Recipe> summarizeRecipe(long id) {
+        return client.get()
+                .uri(builder -> builder.path("/recipes")
+                        .pathSegment(Long.toString(id), "summary").path("/")
+                        .queryParam(API_KEY_NAME, this.apiKey)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(Recipe.class);
+    }
+
 }

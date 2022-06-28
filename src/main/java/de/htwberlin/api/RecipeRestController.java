@@ -34,8 +34,8 @@ public class RecipeRestController {
         return recipeService.getRecipeInformation(id);
     }
 
-//    @GetMapping(value="/recipeByName/{query}")
-//    public Flux<RecipeCard> searchRecipe(@PathVariable("query") String query) {
-//        return recipeService.searchRecipe(query);
-//    }
+    @GetMapping(value="/recipeSummary/{id}")
+    public Mono<Recipe> getSummary(@PathVariable("id") long id) {
+        return recipeService.summarizeRecipe(id);
+    }
 }
