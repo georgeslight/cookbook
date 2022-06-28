@@ -1,14 +1,18 @@
 //package de.htwberlin.services;
 //
-//import de.htwberlin.api.Recipe;
+//import de.htwberlin.api.RecipeCard;
 //import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.http.HttpHeaders;
+//import org.springframework.http.HttpMethod;
+//import org.springframework.http.HttpStatus;
 //import org.springframework.http.MediaType;
 //import org.springframework.stereotype.Service;
 //import org.springframework.web.reactive.function.client.WebClient;
-//import reactor.core.publisher.Flux;
+//import org.springframework.web.reactive.function.client.WebClient.*;
 //import reactor.core.publisher.Mono;
 //
-//import java.util.List;
+//import java.nio.charset.StandardCharsets;
+//import java.time.ZonedDateTime;
 //
 //@Service
 //public class RecipeClient {
@@ -20,32 +24,39 @@
 //
 //    private final WebClient client;
 //
-//    public RecipeClient(WebClient.Builder builder) {
-//        this.client = builder.baseUrl(ENDPOINT).build();
+//    private RecipeCard recipeCard;
+//
+//    public RecipeClient () {
+//        this.client = WebClient.create();
 //    }
 //
-//    public Flux<Recipe> getByIngredients(List<String> ingredients) {
+//    public Mono<String> getRecipe(String query) {
+//        UriSpec<RequestBodySpec> uriSpec = client.method(HttpMethod.GET);
 //
-//        return client.get()
-//                .uri(builder -> builder.path("/recipes/findByIngredients")
-//                        .queryParam("apiKey", this.apiKey)
-//                        .queryParam("ingredients", String.join(",+", ingredients))
-//                        .build())
-//                .accept(MediaType.APPLICATION_JSON)
-//                .retrieve()
-//                .bodyToFlux(Recipe.class);
+//        RequestBodySpec bodySpec = uriSpec.uri(builder -> builder.path("/recipes/complexSearch")
+//                .queryParam("apiKey", "30b0ba6660f343a581c3f5123022eb73")
+//                .queryParam("query", query)
+//                .build());
+//
+//        RequestHeadersSpec<?> headersSpec = bodySpec.bodyValue(recipeCard);
+//
+//        ResponseSpec responseSpec = headersSpec.header(
+//                        HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+//                .accept(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML)
+//                .acceptCharset(StandardCharsets.UTF_8)
+//                .ifNoneMatch("*")
+//                .ifModifiedSince(ZonedDateTime.now())
+//                .retrieve();
+//
+//        return headersSpec.exchangeToMono(response -> {
+//            if (response.statusCode().equals(HttpStatus.OK)) {
+//                return response.bodyToMono(String.class);
+//            } else if (response.statusCode().is4xxClientError()) {
+//                return Mono.just("Error response");
+//            } else {
+//                return response.createException()
+//                        .flatMap(Mono::error);
+//            }
+//        });
 //    }
-//
-//    public Mono<Recipe> getInformationById(long id) {
-//
-//        return client.get()
-//                .uri(builder -> builder.path("/recipes")
-//                        .pathSegment(Long.toString(id), "information").path("/")
-//                        .queryParam("apiKey", this.apiKey)
-//                        .build())
-//                .accept(MediaType.APPLICATION_JSON)
-//                .retrieve()
-//                .bodyToMono(Recipe.class);
-//    }
-//
 //}

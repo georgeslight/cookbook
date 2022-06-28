@@ -34,8 +34,8 @@ public class RecipeRestController {
         return recipeService.getRecipeInformation(id);
     }
 
-    @GetMapping(value="/randomRecipe/{number}")
-    public Flux<Recipe> getRandomRecipe(@PathVariable("number") long number) {
-        return recipeService.getRandomRecipe(number);
-    }
+//    @GetMapping(value="/recipeByName/{query}")
+//    public Flux<RecipeCard> searchRecipe(@PathVariable("query") String query) {
+//        return recipeService.searchRecipe(query);
+//    }
 }

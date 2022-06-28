@@ -2,10 +2,16 @@ package de.htwberlin.services;
 
 import de.htwberlin.api.Ingredient;
 import de.htwberlin.api.Recipe;
+import de.htwberlin.api.RecipeCard;
 import de.htwberlin.persistence.AmountEntity;
 import de.htwberlin.persistence.RecipeEntity;
 import de.htwberlin.persistence.RecipeRepository;
+import jdk.jfr.ContentType;
+import org.apache.logging.log4j.util.PropertiesUtil;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -38,7 +44,7 @@ public class RecipeService {
             for (AmountEntity amount : amounts) {
                 ingredients.add(new Ingredient(amount.getIngredient().getId(), amount.getIngredient().getIngName(), amount.getIngredient().isVegetarian(), amount.getIngredient().isVegan()));
             }
-            Recipe recipe = new Recipe(recipeEntity.getId(), recipeEntity.getRecipeName()/*, ingredients*/);
+            Recipe recipe = new Recipe(recipeEntity.getId(), recipeEntity.getRecipeName(), ingredients);
             recipeList.add(recipe);
         }
         return recipeList;
@@ -72,7 +78,6 @@ public class RecipeService {
     }
 
     public Mono<Recipe> getRecipeInformation(long id) {
-
         return client.get()
                 .uri(builder -> builder.path(RECIPE_INFORMATION_PATH)
                         .pathSegment(Long.toString(id), "information").path("/")
@@ -83,15 +88,27 @@ public class RecipeService {
                 .bodyToMono(Recipe.class);
     }
 
-    public Flux<Recipe> getRandomRecipe(long number) {
-
-        return client.get()
-                .uri(builder -> builder.path(RANDOM_RECIPE)
-                        .queryParam(API_KEY_NAME, this.apiKey)
-                        .queryParam("number", number)
-                        .build())
-                    .accept(MediaType.APPLICATION_JSON)
-                    .retrieve()
-                    .bodyToFlux(Recipe.class);
-    }
+//    public Flux<RecipeCard> searchRecipe(String query) {
+//        Flux<RecipeCard> result = client.get()
+//                .uri("recipes/complexSearch?apiKey=30b0ba6660f343a581c3f5123022eb73&query=" + query + "&diet=vegan")
+////                .uri(builder -> builder.path("/recipes/complexSearch")
+////                        .queryParam("apiKey", "30b0ba6660f343a581c3f5123022eb73")
+////                        .queryParam("query", query)
+////                        .queryParam("diet", "vegan")
+//////                        .queryParam("addRecipeInformation", true)
+////                        .build())
+//                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+//                .accept(MediaType.APPLICATION_JSON)
+////                .exchangeToFlux(response -> {
+////                    if (response.statusCode().equals((HttpStatus.OK))) {
+////                        return response.bodyToFlux(String.class);
+////                    } else {
+////                        return response.createException().flatMapMany(Mono::error);
+////                    }
+////                });
+//                    .retrieve()
+//                    .bodyToFlux(RecipeCard.class);
+//        System.out.println(result);
+//        return result;
+//    }
 }
