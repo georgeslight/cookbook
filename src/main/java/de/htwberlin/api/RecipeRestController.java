@@ -38,4 +38,11 @@ public class RecipeRestController {
     public Mono<Recipe> getSummary(@PathVariable("id") long id) {
         return recipeService.summarizeRecipe(id);
     }
+
+    @GetMapping(value="/getRecipeInstructions/{id}")
+    public Flux<RecipeInstructions> getInstructions(@PathVariable("id") long id) {
+        return recipeService.recipeInstructions(id);
+    }
+
+
 }

@@ -3,6 +3,7 @@ package de.htwberlin.services;
 import de.htwberlin.api.Ingredient;
 import de.htwberlin.api.Recipe;
 import de.htwberlin.api.RecipeCard;
+import de.htwberlin.api.RecipeInstructions;
 import de.htwberlin.persistence.AmountEntity;
 import de.htwberlin.persistence.RecipeEntity;
 import de.htwberlin.persistence.RecipeRepository;
@@ -99,4 +100,14 @@ public class RecipeService {
                 .bodyToMono(Recipe.class);
     }
 
+    public Flux<RecipeInstructions> recipeInstructions(long id) {
+        return client.get()
+                .uri(builder -> builder.path("/recipes")
+                        .pathSegment(Long.toString(id), "analyzedInstructions").path("/")
+                        .queryParam(API_KEY_NAME, this.apiKey)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToFlux(RecipeInstructions.class);
+    }
 }
