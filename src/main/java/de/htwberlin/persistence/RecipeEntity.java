@@ -1,46 +1,83 @@
 package de.htwberlin.persistence;
 
+import de.htwberlin.api.Ingredient;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 
 @Entity(name = "recipe")
 public class RecipeEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name ="id")
     private long id;
+    @Column(name ="title")
+    private String title;
+    @Column (name ="image")
+    private String image;
+    @Column (name = "likes")
+    private int likes;
+    @Column (name = "summary")
+    private String summary;
 
-    @Column(name = "recipeName", nullable = false)
-    private String recipeName;
+    //private List<Ingredient> extendedIngredients;
 
-
-    @OneToMany(mappedBy = "recipe")
-    Set<AmountEntity> amount;
-
-
-    public RecipeEntity(long id, String recipeName) {
-        this.id = id;
-        this.recipeName = recipeName;
+    public RecipeEntity(String title, String image, int likes, String summary) {
+        this.title = title;
+        this.image = image;
+        this.likes = likes;
+        this.summary = summary;
     }
 
-    protected RecipeEntity() {
+    public RecipeEntity() {
     }
 
     public long getId() {
         return id;
     }
 
-    public String getRecipeName() {
-        return recipeName;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public void setRecipeName(String recipeName) {
-        this.recipeName = recipeName;
+    public String getTitle() {
+        return title;
     }
 
-    public Set<AmountEntity> getAmount() {
-        return amount;
+    public void setTitle(String title) {
+        this.title = title;
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+//    public List<Ingredient> getExtendedIngredients() {
+//        return extendedIngredients;
+//    }
+//
+//    public void setExtendedIngredients(List<Ingredient> extendedIngredients) {
+//        this.extendedIngredients = extendedIngredients;
+//    }
 }

@@ -1,9 +1,6 @@
 package de.htwberlin.services;
 
-import de.htwberlin.api.Ingredient;
-import de.htwberlin.api.Recipe;
-import de.htwberlin.api.RecipeCard;
-import de.htwberlin.api.RecipeInstructions;
+import de.htwberlin.api.*;
 import de.htwberlin.persistence.AmountEntity;
 import de.htwberlin.persistence.RecipeEntity;
 import de.htwberlin.persistence.RecipeRepository;
@@ -49,6 +46,12 @@ public class RecipeService {
             recipeList.add(recipe);
         }
         return recipeList;
+    }
+
+    public Recipe create(RecipeManipulationRequest request) {
+        var recipeEntity = new RecipeEntity(
+                request.
+        )
     }
 
     @Value("${API_KEY}")
