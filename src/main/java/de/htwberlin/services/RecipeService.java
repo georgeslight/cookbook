@@ -2,17 +2,11 @@ package de.htwberlin.services;
 
 import de.htwberlin.api.Ingredient;
 import de.htwberlin.api.Recipe;
-import de.htwberlin.api.RecipeCard;
 import de.htwberlin.api.RecipeInstructions;
 import de.htwberlin.persistence.AmountEntity;
 import de.htwberlin.persistence.RecipeEntity;
 import de.htwberlin.persistence.RecipeRepository;
-import jdk.jfr.ContentType;
-import org.apache.logging.log4j.util.PropertiesUtil;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -56,20 +50,14 @@ public class RecipeService {
 
     private static final String ENDPOINT = "https://api.spoonacular.com";
 
-    private static final String RECIPE_BY_INGREDIENTS_PATH = "/recipes/findByIngredients";
-
-    private static final String RECIPE_INFORMATION_PATH = "/recipes";
-
     private static final String API_KEY_NAME = "apiKey";
-
-    private static final String RANDOM_RECIPE = "/recipes/random";
 
     private final WebClient client;
 
     public Flux<Recipe> getRecipe(List<String> ingredients) {
 
         return client.get()
-                .uri(builder -> builder.path(RECIPE_BY_INGREDIENTS_PATH)
+                .uri(builder -> builder.path("/recipes/findByIngredients")
                         .queryParam(API_KEY_NAME, this.apiKey)
                         .queryParam("ingredients", String.join(",+", ingredients))
                         .build())
@@ -80,7 +68,7 @@ public class RecipeService {
 
     public Mono<Recipe> getRecipeInformation(long id) {
         return client.get()
-                .uri(builder -> builder.path(RECIPE_INFORMATION_PATH)
+                .uri(builder -> builder.path("/recipes")
                         .pathSegment(Long.toString(id), "information").path("/")
                         .queryParam(API_KEY_NAME, this.apiKey)
                         .build())
