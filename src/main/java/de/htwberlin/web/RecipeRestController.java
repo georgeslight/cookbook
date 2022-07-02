@@ -35,6 +35,12 @@ public class RecipeRestController {
         return ResponseEntity.created(uri).build();
     }
 
+    @DeleteMapping(path = "/api/v1/recipe/{id}")
+    public ResponseEntity<Void> deleteRecipe(@PathVariable Long id) {
+        boolean successful = recipeService.deleteById(id);
+        return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+
 //    Client
     @GetMapping(value = "/recipeByIngredients/{ingredients}")
     public Flux<Recipe> findByIngredientName(@PathVariable("ingredients") List<String> ingredients) {

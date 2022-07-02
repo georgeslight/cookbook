@@ -41,8 +41,8 @@ public class RecipeService {
     public Recipe create(RecipeManipulationRequest request) {
         var recipeEntity = new RecipeEntity(
                 request.getTitle(),
-                request.getImage(),
-                request.getSummary());
+                request.getSummary(),
+                request.getImage());
 
         Set<IngredientEntity> ingredientsEntity = request.getExtendedIngredients()
                 .stream()
@@ -61,6 +61,15 @@ public class RecipeService {
 
         return recipeTransformer.transformEntity(recipeEntity);
     }
+
+    public boolean deleteById(Long id) {
+        if(!recipeRepository.existsById(id)) {
+            return false;
+        }
+        recipeRepository.deleteById(id);
+        return true;
+    }
+
 
 //    Client
     @Value("${API_KEY}")
