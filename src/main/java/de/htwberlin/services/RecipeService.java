@@ -1,11 +1,10 @@
 package de.htwberlin.services;
 
-import de.htwberlin.api.Ingredient;
-import de.htwberlin.api.Recipe;
-import de.htwberlin.api.RecipeInstructions;
-import de.htwberlin.persistence.AmountEntity;
+import de.htwberlin.persistence.IngredientEntity;
 import de.htwberlin.persistence.RecipeEntity;
 import de.htwberlin.persistence.RecipeRepository;
+import de.htwberlin.persistence.StepEntity;
+import de.htwberlin.web.api.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -14,37 +13,56 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class RecipeService {
 
     private final RecipeRepository recipeRepository;
+    private final RecipeTransformer recipeTransformer;
 
-    public RecipeService(RecipeRepository recipeRepository, WebClient.Builder builder) {
+    public RecipeService(RecipeRepository recipeRepository, RecipeTransformer recipeTransformer, WebClient.Builder builder) {
         this.recipeRepository = recipeRepository;
         this.client = builder.baseUrl(ENDPOINT).build();
+        this.recipeTransformer = recipeTransformer;
     }
 
+//    Database
     @Transactional
     public List<Recipe> findAll() {
         List<RecipeEntity> recipes = recipeRepository.findAll();
-        List<Recipe> recipeList = new ArrayList<>();
-
-        for (RecipeEntity recipeEntity : recipes) {
-            ArrayList<Ingredient> ingredients = new ArrayList<>();
-            Set<AmountEntity> amounts = recipeEntity.getAmount();
-            for (AmountEntity amount : amounts) {
-                ingredients.add(new Ingredient(amount.getIngredient().getId(), amount.getIngredient().getIngName(), amount.getIngredient().isVegetarian(), amount.getIngredient().isVegan()));
-            }
-            Recipe recipe = new Recipe(recipeEntity.getId(), recipeEntity.getRecipeName(), ingredients);
-            recipeList.add(recipe);
-        }
-        return recipeList;
+        return recipes.stream()
+                .map(recipeTransformer::transformEntity)
+                .collect(Collectors.toList());
     }
 
+    public Recipe create(RecipeManipulationRequest request) {
+        var recipeEntity = new RecipeEntity(
+                request.getTitle(),
+                request.getImage(),
+                request.getSummary());
+
+        Set<IngredientEntity> ingredientsEntity = request.getExtendedIngredients()
+                .stream()
+                .map(ingredient -> new IngredientEntity(ingredient.getName()))
+                .collect(Collectors.toSet());
+
+        RecipeEntity finalRecipeEntity = recipeEntity;
+        Set<StepEntity> stepsEntity = request.getSteps()
+                .stream()
+                .map(step -> new StepEntity(step.getNumber(), step.getStep(), finalRecipeEntity))
+                .collect(Collectors.toSet());
+
+        recipeEntity.setIngredients(ingredientsEntity);
+        recipeEntity.setSteps(stepsEntity);
+        recipeEntity = recipeRepository.save(recipeEntity);
+
+        return recipeTransformer.transformEntity(recipeEntity);
+    }
+
+//    Client
     @Value("${API_KEY}")
     private String apiKey;
 
@@ -88,7 +106,7 @@ public class RecipeService {
                 .bodyToMono(Recipe.class);
     }
 
-    public Flux<RecipeInstructions> recipeInstructions(long id) {
+    public Flux<Recipe> recipeInstructions(long id) {
         return client.get()
                 .uri(builder -> builder.path("/recipes")
                         .pathSegment(Long.toString(id), "analyzedInstructions").path("/")
@@ -96,6 +114,6 @@ public class RecipeService {
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .bodyToFlux(RecipeInstructions.class);
+                .bodyToFlux(Recipe.class);
     }
 }

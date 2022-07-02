@@ -1,12 +1,11 @@
 package de.htwberlin.persistence;
 
+import de.htwberlin.web.api.Ingredient;
+
 import javax.persistence.*;
 import java.util.Set;
 
-/**
- * Stellt Tabelle und Spalten der Klasse Ingredient in der Datenbank her.
- */
-@Entity(name = "ingredient")
+@Entity(name = "ingredients")
 public class IngredientEntity {
 
     @Id
@@ -14,24 +13,14 @@ public class IngredientEntity {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "ingName", nullable = false)
-    private String ingName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "vegetarian", nullable = false)
-    private boolean vegetarian;
+    @ManyToMany(mappedBy = "ingredients")
+    private Set<RecipeEntity> recipes;
 
-    @Column(name = "vegan", nullable = false)
-    private boolean vegan;
-
-    @OneToMany(mappedBy = "ingredient")
-    Set<AmountEntity> amount;
-
-
-    public IngredientEntity(String ingName, boolean vegetarian, boolean vegan) {
-
-        this.ingName = ingName;
-        this.vegetarian = vegetarian;
-        this.vegan = vegan;
+    public IngredientEntity(String name) {
+        this.name = name;
     }
 
     protected IngredientEntity() {
@@ -41,27 +30,17 @@ public class IngredientEntity {
         return id;
     }
 
-    public String getIngName() {
-        return ingName;
+    public String getName() {
+        return name;
     }
 
-    public void setIngName(String ingName) {
-        this.ingName = ingName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public boolean isVegetarian() {
-        return vegetarian;
-    }
-
-    public void setVegetarian(boolean vegetarian) {
-        this.vegetarian = vegetarian;
-    }
-
-    public boolean isVegan() {
-        return vegan;
-    }
-
-    public void setVegan(boolean vegan) {
-        this.vegan = vegan;
+    public static Ingredient transformEntity(IngredientEntity ingredientEntity) {
+        return new Ingredient(
+                ingredientEntity.getId(),
+                ingredientEntity.getName());
     }
 }

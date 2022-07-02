@@ -1,46 +1,87 @@
 package de.htwberlin.persistence;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
-
-@Entity(name = "recipe")
+@Entity(name = "recipes")
 public class RecipeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
+    @Column (name ="id")
+    private Long id;
 
-    @Column(name = "recipeName", nullable = false)
-    private String recipeName;
+    @Column(name ="title")
+    private String title;
+
+    @Column (name = "summary", columnDefinition = "text")
+    private String summary;
+
+    @Column (name ="image")
+    private String image;
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "recipe_ingredients", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    private Set<IngredientEntity> ingredients;
+
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private Set<StepEntity> steps = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "recipe")
-    Set<AmountEntity> amount;
-
-
-    public RecipeEntity(long id, String recipeName) {
-        this.id = id;
-        this.recipeName = recipeName;
+    public RecipeEntity(String title, String summary, String image) {
+        this.title = title;
+        this.summary = summary;
+        this.image = image;
     }
 
-    protected RecipeEntity() {
+    public RecipeEntity() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public String getRecipeName() {
-        return recipeName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setRecipeName(String recipeName) {
-        this.recipeName = recipeName;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public Set<AmountEntity> getAmount() {
-        return amount;
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Set<IngredientEntity> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<IngredientEntity> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public Set<StepEntity> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(Set<StepEntity> steps) {
+        this.steps = steps;
     }
 }
