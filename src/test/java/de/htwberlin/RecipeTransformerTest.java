@@ -33,7 +33,7 @@ public class RecipeTransformerTest implements WithAssertions {
         //given
         var recipeEntity = Mockito.mock(RecipeEntity.class);
         doReturn(1L).when(recipeEntity).getId();
-        doReturn("Caprese Sticks").when(recipeEntity).getTitle();
+        doReturn("Caprese Sticks").when(recipeEntity).getName();
         doReturn("foodpic").when(recipeEntity).getImage();
         doReturn("cut veggies").when(recipeEntity).getSummary();
         doReturn(steps).when(recipeEntity).getSteps();
@@ -46,12 +46,12 @@ public class RecipeTransformerTest implements WithAssertions {
         //then
 
         assertThat(result.getId()).isEqualTo(1L);
-        assertThat(result.getTitle()).isEqualTo("Caprese Sticks");
+        assertThat(result.getName()).isEqualTo("Caprese Sticks");
         assertThat(result.getImage()).isEqualTo("foodpic");
         assertThat(result.getSteps()).isEqualTo(steps);
         assertThat(result.getSummary()).isEqualTo("cut veggies");
-        assertThat(result.getExtendedIngredients()).isEqualTo(ingredients);
-        assertThat(result.getExtendedIngredients()).hasSize(0);
+        assertThat(result.getIngredients()).isEqualTo(ingredients);
+        assertThat(result.getIngredients()).hasSize(0);
         assertThat(result.getSteps()).hasSize(0);
     }
 
