@@ -49,6 +49,6 @@ public class SpoonacularAPIsTest {
         assert response != null;
         System.out.println(response.getBody());
         assertEquals(200, response.getStatusCodeValue());
-
     }
+
 }
