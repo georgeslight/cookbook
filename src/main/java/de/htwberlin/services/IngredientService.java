@@ -1,5 +1,7 @@
 package de.htwberlin.services;
 
+import de.htwberlin.persistence.IngredientEntity;
+import de.htwberlin.web.api.Ingredient;
 import org.springframework.stereotype.Service;
 import de.htwberlin.persistence.IngredientRepository;
 
@@ -23,7 +25,7 @@ public class IngredientService {
 //        return transformEntity(ingredientEntity);
 //    }
 
-//    private Ingredient transformEntity(IngredientEntity ingredientEntity){
-//        return new Ingredient(ingredientEntity.getId(), ingredientEntity.getIngName()/*, ingredientEntity.isVegetarian(), ingredientEntity.isVegan()*/);
-//    }
+    private Ingredient transformEntity(IngredientEntity ingredientEntity){
+        return new Ingredient(ingredientEntity.getId(), ingredientEntity.getName(), ingredientEntity.getAmount(), ingredientEntity.getUnit());
+    }
 }

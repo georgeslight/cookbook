@@ -26,11 +26,12 @@ spring:
   jpa:
     properties:
       hibernate:
+        format_sql: ture
         # The SQL dialect makes Hibernate generate better SQL for the chosen database
         dialect: org.hibernate.dialect.PostgreSQLDialect
         jdbc:
           time_zone: UTC
-    show-sql: false # Set true for debugging
+    show-sql: true # Set true for debugging
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update # (create, create-drop, validate, update)
@@ -42,3 +43,17 @@ spring:
 API_KEY: ${API_KEY}
 server:
   port: 8080
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: Debug
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+      springframework:
+        jdbc:
+          core:
+            JdbsTemplate: DEBUG
+            StatementCreatorUtils: TRACE

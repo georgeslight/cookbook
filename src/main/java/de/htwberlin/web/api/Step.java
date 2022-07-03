@@ -5,13 +5,11 @@ public class Step {
     private Long id;
     private Long number;
     private String step;
-//    private Set<Ingredient> ingredients;
 
-    public Step(Long id,Long number, String step/*, Set<Ingredient> ingredients*/) {
+    public Step(Long id,Long number, String step) {
         this.id = id;
         this.number = number;
         this.step = step;
-//        this.ingredients = ingredients;
     }
 
     public Step() {
@@ -44,12 +42,4 @@ public class Step {
     public void setStep(String step) {
         this.step = step;
     }
-
-//    public Set<Ingredient> getIngredients() {
-//        return ingredients;
-//    }
-//
-//    public void setIngredients(Set<Ingredient> ingredients) {
-//        this.ingredients = ingredients;
-//    }
 }

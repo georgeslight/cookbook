@@ -23,6 +23,16 @@ public class RecipeRestController {
     }
 
 //    Database
+    @GetMapping(path = "/api/v1/recipeByName/{name}")
+    public ResponseEntity<List<Recipe>> recipeByName(@PathVariable String name) {
+        return ResponseEntity.ok(recipeService.findAllByName(name));
+    }
+
+    @GetMapping(path = "/api/v1/likedRecipes/{liked}")
+    public ResponseEntity<List<Recipe>> getLikedRecipes(@PathVariable Boolean liked) {
+        return ResponseEntity.ok(recipeService.findAllByLiked(liked));
+    }
+
     @GetMapping(path = "/api/v1/recipe")
     public ResponseEntity<List<Recipe>> fetchRecipes() {
         return ResponseEntity.ok(recipeService.findAll());
@@ -41,24 +51,30 @@ public class RecipeRestController {
         return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
-//    Client
-    @GetMapping(value = "/recipeByIngredients/{ingredients}")
-    public Flux<Recipe> findByIngredientName(@PathVariable("ingredients") List<String> ingredients) {
-        return recipeService.getRecipe(ingredients);
+    @PutMapping(path = "/api/v1/recipe/{id}")
+    public ResponseEntity<Recipe> updateRecipe(@PathVariable Long id, @RequestBody RecipeManipulationRequest request) {
+        var recipe = recipeService.update(id, request);
+        return recipe != null? ResponseEntity.ok(recipe) : ResponseEntity.notFound().build();
     }
 
-    @GetMapping(value = "/recipeInformation/{id}")
-    public Mono<Recipe> getRecipeInformation(@PathVariable("id") long id) {
-        return recipeService.getRecipeInformation(id);
-    }
-
-    @GetMapping(value="/recipeSummary/{id}")
-    public Mono<Recipe> getSummary(@PathVariable("id") long id) {
-        return recipeService.summarizeRecipe(id);
-    }
-
-    @GetMapping(value="/getRecipeInstructions/{id}")
-    public Flux<Recipe> getInstructions(@PathVariable("id") long id) {
-        return recipeService.recipeInstructions(id);
-    }
+////    Client
+//    @GetMapping(value = "/recipeByIngredients/{ingredients}")
+//    public Flux<Recipe> findByIngredientName(@PathVariable("ingredients") List<String> ingredients) {
+//        return recipeService.getRecipe(ingredients);
+//    }
+//
+//    @GetMapping(value = "/recipeInformation/{id}")
+//    public Mono<Recipe> getRecipeInformation(@PathVariable("id") long id) {
+//        return recipeService.getRecipeInformation(id);
+//    }
+//
+//    @GetMapping(value="/recipeSummary/{id}")
+//    public Mono<Recipe> getSummary(@PathVariable("id") long id) {
+//        return recipeService.summarizeRecipe(id);
+//    }
+//
+//    @GetMapping(value="/getRecipeInstructions/{id}")
+//    public Flux<Recipe> getInstructions(@PathVariable("id") long id) {
+//        return recipeService.recipeInstructions(id);
+//    }
 }

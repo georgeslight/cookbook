@@ -15,14 +15,17 @@ public class RecipeEntity {
     @Column (name ="id")
     private Long id;
 
-    @Column(name ="title")
-    private String title;
+    @Column(name ="name", columnDefinition = "text")
+    private String name;
 
     @Column (name = "summary", columnDefinition = "text")
     private String summary;
 
-    @Column (name ="image")
+    @Column (name ="image", columnDefinition = "text")
     private String image;
+
+    @Column(name = "liked")
+    private Boolean liked;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
     @JoinTable(name = "recipe_ingredients", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
@@ -32,10 +35,11 @@ public class RecipeEntity {
     private Set<StepEntity> steps = new HashSet<>();
 
 
-    public RecipeEntity(String title, String summary, String image) {
-        this.title = title;
+    public RecipeEntity(String name, String summary, String image, boolean liked) {
+        this.name = name;
         this.summary = summary;
         this.image = image;
+        this.liked = liked;
     }
 
     public RecipeEntity() {
@@ -45,12 +49,12 @@ public class RecipeEntity {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSummary() {
@@ -83,5 +87,13 @@ public class RecipeEntity {
 
     public void setSteps(Set<StepEntity> steps) {
         this.steps = steps;
+    }
+
+    public Boolean getLiked() {
+        return liked;
+    }
+
+    public void setLiked(Boolean liked) {
+        this.liked = liked;
     }
 }

@@ -4,17 +4,33 @@ public class Ingredient {
 
     private Long id;
     private String name;
-//    private Double amount;
-//    private String unit;
+    private double amount;
+    private String unit;
 
-    public Ingredient(Long id, String name/*, Double amount, String unit*/) {
+    public Ingredient(Long id, String name, double amount, String unit) {
         this.id = id;
         this.name = name;
-//        this.amount = amount;
-//        this.unit = unit;
+        this.amount = amount;
+        this.unit = unit;
     }
 
     public Ingredient() {
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public Long getId() {
@@ -32,21 +48,5 @@ public class Ingredient {
     public void setName(String name) {
         this.name = name;
     }
-
-//    public Double getAmount() {
-//        return amount;
-//    }
-//
-//    public void setAmount(Double amount) {
-//        this.amount = amount;
-//    }
-//
-//    public String getUnit() {
-//        return unit;
-//    }
-//
-//    public void setUnit(String unit) {
-//        this.unit = unit;
-//    }
 }
 

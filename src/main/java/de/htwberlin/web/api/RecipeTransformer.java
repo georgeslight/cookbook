@@ -24,10 +24,11 @@ public class RecipeTransformer {
 
         return new Recipe(
                 recipeEntity.getId(),
-                recipeEntity.getTitle(),
+                recipeEntity.getName(),
                 recipeEntity.getImage(),
                 recipeEntity.getSummary(),
                 steps,
-                ingredients);
+                ingredients,
+                recipeEntity.getLiked());
     }
 }

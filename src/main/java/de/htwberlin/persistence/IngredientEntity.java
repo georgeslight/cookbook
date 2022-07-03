@@ -13,17 +13,53 @@ public class IngredientEntity {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, columnDefinition = "text")
     private String name;
+
+    @Column(name = "amount")
+    private double amount;
+
+    @Column(name = "unit")
+    private String unit;
 
     @ManyToMany(mappedBy = "ingredients")
     private Set<RecipeEntity> recipes;
+
+    public IngredientEntity(String name, double amount, String unit) {
+        this.name = name;
+        this.amount = amount;
+        this.unit = unit;
+    }
 
     public IngredientEntity(String name) {
         this.name = name;
     }
 
     protected IngredientEntity() {
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public Set<RecipeEntity> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(Set<RecipeEntity> recipes) {
+        this.recipes = recipes;
     }
 
     public long getId() {
@@ -41,6 +77,8 @@ public class IngredientEntity {
     public static Ingredient transformEntity(IngredientEntity ingredientEntity) {
         return new Ingredient(
                 ingredientEntity.getId(),
-                ingredientEntity.getName());
+                ingredientEntity.getName(),
+                ingredientEntity.getAmount(),
+                ingredientEntity.getUnit());
     }
 }

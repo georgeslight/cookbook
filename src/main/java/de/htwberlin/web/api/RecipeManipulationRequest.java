@@ -5,33 +5,31 @@ import java.util.Set;
 
 public class RecipeManipulationRequest {
 
-    private String title;
     private String name;
     private String image;
-    private Integer likes;
     private String summary;
     private Set<Step> steps;
-    private Set<Ingredient> extendedIngredients;
+    private Set<Ingredient> ingredients;
+    private boolean liked;
 
-    public RecipeManipulationRequest(String title/*, String name*/, String image/*, Integer likes*/, String summary, Set<Step> steps, Set<Ingredient> extendedIngredients) {
-        this.title = title;
-//        this.name = name;
+    public RecipeManipulationRequest(String name, String image, String summary, Set<Step> steps, Set<Ingredient> ingredients, boolean liked) {
+        this.name = name;
         this.image = image;
-//        this.likes = likes;
         this.summary = summary;
         this.steps = steps;
-        this.extendedIngredients = extendedIngredients;
+        this.ingredients = ingredients;
+        this.liked = liked;
     }
 
     public RecipeManipulationRequest() {
     }
 
-    public String getTitle() {
-        return title;
+    public boolean isLiked() {
+        return liked;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setLiked(boolean liked) {
+        this.liked = liked;
     }
 
     public String getName() {
@@ -50,14 +48,6 @@ public class RecipeManipulationRequest {
         this.image = image;
     }
 
-    public Integer getLikes() {
-        return likes;
-    }
-
-    public void setLikes(Integer likes) {
-        this.likes = likes;
-    }
-
     public String getSummary() {
         return summary;
     }
@@ -74,11 +64,11 @@ public class RecipeManipulationRequest {
         this.steps = steps;
     }
 
-    public Set<Ingredient> getExtendedIngredients() {
-        return extendedIngredients;
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
     }
 
-    public void setExtendedIngredients(Set<Ingredient> extendedIngredients) {
-        this.extendedIngredients = extendedIngredients;
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }

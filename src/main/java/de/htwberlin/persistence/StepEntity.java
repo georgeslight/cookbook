@@ -15,7 +15,7 @@ public class StepEntity {
     @Column(name = "number")
     private Long number;
 
-    @Column(name = "step")
+    @Column(name = "step", columnDefinition = "text")
     private String step;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
