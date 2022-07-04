@@ -3,6 +3,8 @@ package de.htwberlin.persistence;
 import de.htwberlin.web.api.Step;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "steps")
 public class StepEntity {

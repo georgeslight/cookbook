@@ -43,17 +43,3 @@ spring:
 API_KEY: ${API_KEY}
 server:
   port: 8080
-logging:
-  level:
-    org:
-      hibernate:
-        SQL: Debug
-        type:
-          descriptor:
-            sql:
-              BasicBinder: TRACE
-      springframework:
-        jdbc:
-          core:
-            JdbsTemplate: DEBUG
-            StatementCreatorUtils: TRACE

@@ -13,7 +13,7 @@ public class IngredientEntity {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "name", nullable = false, columnDefinition = "text")
+    @Column(name = "name", columnDefinition = "text")
     private String name;
 
     @Column(name = "amount")
@@ -80,5 +80,12 @@ public class IngredientEntity {
                 ingredientEntity.getName(),
                 ingredientEntity.getAmount(),
                 ingredientEntity.getUnit());
+    }
+
+    public static IngredientEntity transformIngredient(Ingredient ingredient) {
+        return new IngredientEntity(
+                ingredient.getName(),
+                ingredient.getAmount(),
+                ingredient.getUnit());
     }
 }

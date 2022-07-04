@@ -67,7 +67,7 @@ public class RecipeService {
 
         Set<IngredientEntity> ingredientsEntity = request.getIngredients()
                 .stream()
-                .map(ingredient -> new IngredientEntity(ingredient.getName()))
+                .map(IngredientEntity::transformIngredient)
                 .collect(Collectors.toSet());
 
         RecipeEntity finalRecipeEntity = recipeEntity;
