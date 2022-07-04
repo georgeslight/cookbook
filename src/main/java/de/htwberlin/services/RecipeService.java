@@ -5,15 +5,11 @@ import de.htwberlin.persistence.RecipeEntity;
 import de.htwberlin.persistence.RecipeRepository;
 import de.htwberlin.persistence.StepEntity;
 import de.htwberlin.web.api.*;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -30,9 +26,16 @@ public class RecipeService {
     }
 
     @Transactional
+    public Optional<Recipe> findById(Long id) {
+        RecipeEntity recipeEntity = recipeRepository.findById(id).orElse(null);
+        assert recipeEntity != null;
+        Recipe recipe = new Recipe(recipeEntity);
+        return Optional.of(recipe);
+    }
+
+    @Transactional
     public List<Recipe> findAllByName(String name) {
         List<RecipeEntity> recipes = recipeRepository.findAllByName(name);
-        System.out.println(recipes);
         return recipes.stream()
                 .map(recipeTransformer::transformEntity)
                 .collect(Collectors.toList());
@@ -103,7 +106,6 @@ public class RecipeService {
         recipeEntity = recipeRepository.save(recipeEntity);
         return recipeTransformer.transformEntity(recipeEntity);
     }
-
 
 //    Client
 //    @Value("${API_KEY}")

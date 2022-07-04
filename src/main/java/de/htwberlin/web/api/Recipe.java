@@ -1,6 +1,11 @@
 package de.htwberlin.web.api;
 
+import de.htwberlin.persistence.IngredientEntity;
+import de.htwberlin.persistence.RecipeEntity;
+import de.htwberlin.persistence.StepEntity;
+
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Recipe {
 
@@ -21,6 +26,22 @@ public class Recipe {
         this.ingredients = ingredients;
         this.liked = liked;
 
+    }
+
+    public Recipe(RecipeEntity recipeEntity) {
+        this.id = recipeEntity.getId();
+        this.name = recipeEntity.getName();
+        this.image = recipeEntity.getImage();
+        this.summary = recipeEntity.getSummary();
+        this.ingredients = recipeEntity.getIngredients()
+                .stream().
+                map(IngredientEntity::transformEntity)
+                .collect(Collectors.toSet());
+        this.steps = recipeEntity.getSteps()
+                .stream()
+                .map(StepEntity::transformEntity)
+                .collect(Collectors.toSet());
+        this.liked = recipeEntity.getLiked();
     }
 
     public boolean isLiked() {

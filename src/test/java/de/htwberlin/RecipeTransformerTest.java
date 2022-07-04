@@ -20,7 +20,7 @@ import static org.mockito.Mockito.doReturn;
 public class RecipeTransformerTest implements WithAssertions {
 
     private final RecipeTransformer test = new RecipeTransformer();
-    private final  Ingredient ingredient = new Ingredient(1L,"mozarella");
+//    private final  Ingredient ingredient = new Ingredient(1L,"mozarella");
     private final Set<Ingredient> ingredients = new HashSet<>();
     private final Step step = new Step(1L,2L,"steps");
     private final Set<Step> steps = new HashSet<>();

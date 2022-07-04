@@ -12,6 +12,7 @@ import reactor.core.publisher.Mono;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class RecipeRestController {
@@ -23,6 +24,11 @@ public class RecipeRestController {
     }
 
 //    Database
+    @GetMapping(path = "/api/v1/getRecipe/{id}")
+    public ResponseEntity<Optional<Recipe>> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(recipeService.findById(id));
+    }
+
     @GetMapping(path = "/api/v1/recipeByName/{name}")
     public ResponseEntity<List<Recipe>> recipeByName(@PathVariable String name) {
         return ResponseEntity.ok(recipeService.findAllByName(name));
