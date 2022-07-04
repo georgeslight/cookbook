@@ -11,8 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class RecipeServiceTest implements WithAssertions {
@@ -39,7 +38,20 @@ public class RecipeServiceTest implements WithAssertions {
     verify(repository).deleteById(givenId);
     assertThat(result).isTrue();
 }
+    @Test
+    @DisplayName("should return true if delete was successful")
+    void deleteFailed(){
+        Long givenId = 1L;
+        doReturn(false).when(repository).existsById(givenId);
 
+
+        //when
+        boolean result = test.deleteById(givenId);
+
+        //then
+        verifyNoMoreInteractions(repository);
+        assertThat(result).isFalse();
+    }
 
 
 }
