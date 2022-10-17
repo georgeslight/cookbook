@@ -21,7 +21,6 @@ public class RecipeRestController {
         this.recipeService = recipeService;
     }
 
-//    Database
     @GetMapping(path = "/api/v1/getRecipe/{id}")
     public ResponseEntity<Optional<Recipe>> findById(@PathVariable Long id) {
         return ResponseEntity.ok(recipeService.findById(id));
@@ -59,6 +58,12 @@ public class RecipeRestController {
     public ResponseEntity<Recipe> updateRecipe(@PathVariable Long id, @RequestBody RecipeManipulationRequest request) {
         var recipe = recipeService.update(id, request);
         return recipe != null? ResponseEntity.ok(recipe) : ResponseEntity.notFound().build();
+    }
+
+    @PostMapping(path = "/api/v1/like")
+    public ResponseEntity<Void> likeRecipe(@RequestParam Long id, @RequestParam boolean liked) {
+        recipeService.likeRecipe(id, liked);
+        return ResponseEntity.ok().build();
     }
 
 ////    Client

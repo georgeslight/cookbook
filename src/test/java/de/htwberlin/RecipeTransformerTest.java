@@ -1,7 +1,6 @@
 package de.htwberlin;
 
 import de.htwberlin.persistence.RecipeEntity;
-import de.htwberlin.persistence.StepEntity;
 import de.htwberlin.web.api.Ingredient;
 import de.htwberlin.web.api.RecipeTransformer;
 import de.htwberlin.web.api.Step;
@@ -9,8 +8,6 @@ import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-import javax.persistence.criteria.CriteriaBuilder;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,14 +17,13 @@ import static org.mockito.Mockito.doReturn;
 public class RecipeTransformerTest implements WithAssertions {
 
     private final RecipeTransformer test = new RecipeTransformer();
-//    private final  Ingredient ingredient = new Ingredient(1L,"mozarella");
     private final Set<Ingredient> ingredients = new HashSet<>();
     private final Step step = new Step(1L,2L,"steps");
     private final Set<Step> steps = new HashSet<>();
 
 
     @Test
-    @DisplayName("Should transform a Recipeentity to a Recipe")
+    @DisplayName("Should transform a RecipeEntity to a Recipe")
     void testTransform(){
 
         //given

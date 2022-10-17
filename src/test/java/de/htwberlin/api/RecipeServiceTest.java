@@ -24,7 +24,7 @@ public class RecipeServiceTest implements WithAssertions {
 
 
 
-@Test
+    @Test
     @DisplayName("should return true if delete was successful")
     void deleteSuccess(){
     Long givenId = 1L;

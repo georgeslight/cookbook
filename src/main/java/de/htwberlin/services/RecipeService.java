@@ -107,6 +107,11 @@ public class RecipeService {
         return recipeTransformer.transformEntity(recipeEntity);
     }
 
+    @Transactional
+    public void likeRecipe(Long id, boolean liked) {
+        recipeRepository.getById(id).setLiked(liked);
+    }
+
 //    Client
 //    @Value("${API_KEY}")
 //    private String apiKey;
